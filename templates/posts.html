@@ -1,0 +1,69 @@
+{% extends "base.html" %} {%block head%}
+<title>Posts</title>
+
+{%endblock %} {%block body%}
+<hr />
+
+<br />
+<br />
+<h1>All Posts</h1>
+<br />
+<hr />
+<h2>Create New Blog Post:</h2>
+<form action="/posts" method="POST">
+    <label for"title">Enter your title</label>
+  <input
+    class="form-control"
+    name="title"
+    id="title"
+    type="text"
+    placeholder="Enter Title"
+    aria-label="Enter Title"
+  />
+  <br />
+  <br />
+  <label for"content">Enter your Blog Post</label>
+  <textarea
+    class="form-control"
+    name="content"
+    id="content"
+    placeholder="Enter Content"
+    rows="3"
+  ></textarea>
+  <br />
+  <br />
+  <label for"content">Author</label>
+  <input
+    class="form-control"
+    name="author"
+    id="author"
+    type="text"
+    placeholder="Enter Author"
+    aria-label="Enter Author"
+  />
+
+  <br />
+  <br />
+  <input type="submit" value="Post" />
+</form>
+<hr />
+
+{%for post in posts %}
+<br />
+<h2>{{post.title}}</h2>
+<br />
+{%if post.author%}
+
+<small>Written by: {{post.author}} on {{post.date_post}}</small>
+{%else %}
+<small>Written by UNKNOWN</small>
+{%endif %}
+<br />
+<p style="white-space: pre-wrap;">{{post.content}}</p>
+<br />
+<hr />
+<a class="btn btn-danger" href="/posts/delete/{{post.id}}">Delete</a>
+<a class="btn btn-primary" href="/posts/edit/{{post.id}}">Edit</a>
+
+<hr />
+{%endfor%} {%endblock %}
